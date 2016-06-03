@@ -1,0 +1,18 @@
+Cinchapi Exercise 1
+
+Contents:
+
+src: contains source files
+bin: contains binaries
+README
+ThreeThreads.jar
+
+To run:
+
+$ java -jar ThreeThreads.jar
+
+Expected output:
+
+1-100 in chronological order
+three distinct collections corresponding to each thread 
+
