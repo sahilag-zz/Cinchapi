@@ -4,7 +4,14 @@ import java.util.HashMap;
 public class DirectedAcyclicGraph {
 	
 	
-	private HashMap<String, ArrayList<String>> edges = new HashMap<String, ArrayList<String>>();
+	private HashMap<String, ArrayList<String>> graph;
+	
+	/**
+	 * Initializes an empty graph
+	 */
+	public DirectedAcyclicGraph(){
+		graph = new HashMap<String, ArrayList<String>>();
+	}
 	
 	/* ------------- Helper methods for addEdge() ------------------*/
 	
@@ -32,7 +39,8 @@ public class DirectedAcyclicGraph {
 	 */
 	
 	private void createNode(String nodeName){
-		
+		ArrayList<String> emptyList = new ArrayList<String>();
+		graph.put(nodeName, emptyList);
 	}
 	
 	
@@ -49,7 +57,45 @@ public class DirectedAcyclicGraph {
 	 */
 	public boolean addEdge(String source, String destination){
 		
-    	 return false;
+		boolean existSource = graph.containsKey(source);
+		boolean existDest = graph.containsKey(destination);
+		// if one or more of the nodes don't exist
+		if (!existSource || !existDest ){
+			if (!existSource){
+				createNode(source);
+			}
+			if (!existDest){
+				createNode(destination);
+			}
+			graph.get(source).add(destination);
+			return true;
+		}
+		// if the edge already exists return false
+		else if(graph.get(source).contains(destination)){
+			return false;
+		}
+		// check that adding the edge doesn't form a directed cycle
+		else{
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * prints the graph as an adjacency list
+	 */
+	public void printGraph(){
+		for (String key : graph.keySet()) {
+		    System.out.println(key + " " + graph.get(key));
+		}
+	}
+	
+	
+	public static void main(String[] args){
+		DirectedAcyclicGraph G = new DirectedAcyclicGraph();
+		String source = "A"; String destination = "B";
+		
+		G.addEdge(source, destination);
 	}
 
 }
