@@ -27,15 +27,42 @@ public class DirectedAcyclicGraph {
 	 * @return {@code true} if there is a path from destination to source.
 	 */ 
 	private boolean checkCycle(String source, String destination){
+		// visitedNodes stores true if reachable via depthFirstSearch()
 		
-		return false;
+		HashMap<String, Boolean> visitedNodes = new HashMap<String, Boolean>();
+		for (String key : graph.keySet()) {
+		    visitedNodes.put(key,false);
+		}
+		
+		depthFirstSearch(destination, visitedNodes);
+		
+		if (visitedNodes.get(source) == false){
+			return false;
+		}
+		else return true;
 	}
 	
+	/**
+	 * performs a depth first search on the graph and marks nodes as visited
+	 * 
+	 * @param v starting node
+	 * @param visited is the Hashmap of visited nodes marked true or false
+	 */
 	
+	private void depthFirstSearch(String v, HashMap<String, Boolean> visited){
+		visited.put(v,true);
+		// iterating through all nodes adjacent to v
+		for (String node: graph.get(v)){
+			if (visited.get(v) == false){
+				depthFirstSearch(node, visited);
+			}
+		}
+		
+	}
 	/**
 	 * Create a new node with an empty nodes list
 	 * 
-	 * @param vertex
+	 * @param nodeName is the name of the new node to be created
 	 */
 	
 	private void createNode(String nodeName){
@@ -76,7 +103,11 @@ public class DirectedAcyclicGraph {
 		}
 		// check that adding the edge doesn't form a directed cycle
 		else{
-			return false;
+			if (checkCycle(source, destination) == false){
+				graph.get(source).add(destination);
+				return true;
+			}
+			else return false;
 		}
 	}
 	
