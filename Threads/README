@@ -2,8 +2,7 @@ Cinchapi Exercise 1
 
 Contents:
 
-src: contains source files
-bin: contains binaries
+src: contains source file(s)
 README
 ThreeThreads.jar
 
