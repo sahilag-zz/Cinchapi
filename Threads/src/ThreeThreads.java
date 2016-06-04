@@ -5,9 +5,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThreeThreads{
 
 	static private AtomicInteger counter = new AtomicInteger(0);
-
+	
     private static class GlobalCounter implements Runnable{
+    	
 	    public void run() {
+	    	
 	    	int new_value; 
 	    	ArrayList<Integer> collection = new ArrayList<Integer>();   // list of values corresponding
 	    																// to a particular thread
@@ -18,7 +20,7 @@ public class ThreeThreads{
 	    		System.out.println(new_value);
 	    	}
 	    	String threadName = Thread.currentThread().getName();
-	    	System.out.println(threadName + " = " + collection);
+	    	System.out.println(threadName + " collection size = "+ collection.size() + " = " + collection);
 	    }
     }
 
@@ -26,8 +28,10 @@ public class ThreeThreads{
         Thread A = (new Thread(new GlobalCounter(), "Thread-A"));
         Thread B = (new Thread(new GlobalCounter(), "Thread-B"));
         Thread C = (new Thread(new GlobalCounter(), "Thread-C"));
-        
+      
         A.start(); B.start(); C.start();
+        
+        
     }
 
 }
