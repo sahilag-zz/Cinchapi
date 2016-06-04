@@ -4,8 +4,19 @@ import java.util.concurrent.atomic.AtomicInteger;
  
 public class ThreeThreads{
 
+	/**
+	 * counter is of type AtomicInteger which supports synchronization and atmoic actions
+	 */
 	static private AtomicInteger counter = new AtomicInteger(0);
 	
+	/**
+	 * Each thread atomically increments {@code counter} and stores {@code new_value}
+	 * in it's {@code collection}. The collection is then printed out after the counter
+	 * reaches 100
+	 * 
+	 * @author sahilagarwal
+	 *
+	 */
     private static class GlobalCounter implements Runnable{
     	
 	    public void run() {
@@ -24,6 +35,10 @@ public class ThreeThreads{
 	    }
     }
 
+    /**
+     * Main() creates three threads and starts them at the same time
+     * @param args
+     */
     public static void main(String args[]) {
         Thread A = (new Thread(new GlobalCounter(), "Thread-A"));
         Thread B = (new Thread(new GlobalCounter(), "Thread-B"));
