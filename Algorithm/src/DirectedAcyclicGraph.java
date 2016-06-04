@@ -53,7 +53,7 @@ public class DirectedAcyclicGraph {
 		visited.put(v,true);
 		// iterating through all nodes adjacent to v
 		for (String node: graph.get(v)){
-			if (visited.get(v) == false){
+			if (visited.get(node) == false){
 				depthFirstSearch(node, visited);
 			}
 		}
@@ -116,6 +116,8 @@ public class DirectedAcyclicGraph {
 	 * prints the graph as an adjacency list
 	 */
 	public void printGraph(){
+		System.out.println("Adjacency list = ");
+
 		for (String key : graph.keySet()) {
 		    System.out.println(key + " " + graph.get(key));
 		}
@@ -124,9 +126,13 @@ public class DirectedAcyclicGraph {
 	
 	public static void main(String[] args){
 		DirectedAcyclicGraph G = new DirectedAcyclicGraph();
-		String source = "A"; String destination = "B";
-		
-		G.addEdge(source, destination);
+				
+		System.out.println("adding edge (a,b) = "+G.addEdge("a", "b"));
+		System.out.println("adding edge (a,b) = "+G.addEdge("a", "b"));
+		System.out.println("adding edge (b,c) = "+G.addEdge("b", "c"));
+		System.out.println("adding edge (c,d) = "+G.addEdge("c", "d"));
+		System.out.println("adding edge (d,a) = "+G.addEdge("d", "a"));
+		G.printGraph();
 	}
 
 }
